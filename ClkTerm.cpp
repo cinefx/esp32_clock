@@ -1,6 +1,6 @@
 // Dutchtronix AVR Oscilloscope Clock
 //
-//  Copyright © 2010 Johannes P.M. de Rie
+//  Copyright @ 2010 Johannes P.M. de Rie
 //
 //  All Rights Reserved
 //

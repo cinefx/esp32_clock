@@ -1,6 +1,6 @@
 // Dutchtronix AVR Oscilloscope Clock
 //
-//  Copyright © 2010 Johannes P.M. de Rie
+//  Copyright @ 2010 Johannes P.M. de Rie
 //
 //  All Rights Reserved
 //
@@ -191,5 +191,3 @@ LedMorseDigit_t LedMorseDigits[10] PROGMEM = {
 
 #include	"./vecttable.inc"
 #include	"./font8x5.inc"
-
-

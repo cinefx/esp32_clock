@@ -1,6 +1,6 @@
 ; ClkRender.s -- source for Dutchtronix Oscilloscope Clock
 ;
-;  Copyright © 2010 Johannes P.M. de Rie
+;  Copyright @ 2010 Johannes P.M. de Rie
 ;
 ;  All Rights Reserved
 ;
@@ -547,7 +547,7 @@ function line(x0, y0, x1, y1)
      for x from x0 to x1
 		pfPlot();
         LineError := LineError + deltay
-        if 2×LineError >= deltax then
+        if 2xLineError >= deltax then
              y := y + YStep
              LineError := LineError - deltax
 #endif
@@ -620,7 +620,7 @@ Line775:
 	add		LineErrorL,DeltaY
 	adc		LineErrorH,__zero_reg_
 Line997:
-;         if 2×LineError >= deltax then
+;         if 2xLineError >= deltax then
 	mov		r0,LineErrorL
 	add		r0,LineErrorL
 	cp		r0,DeltaX
@@ -1363,4 +1363,3 @@ down_h10:
 		ret
 
 	.balign 2
-

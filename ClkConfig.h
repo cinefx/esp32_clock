@@ -1,6 +1,6 @@
 // Dutchtronix
 //
-//  Copyright © 2010 Jan P.M. de Rie
+//  Copyright @ 2010 Jan P.M. de Rie
 //
 //  All Rights Reserved
 //

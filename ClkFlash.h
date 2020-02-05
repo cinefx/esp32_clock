@@ -1,6 +1,6 @@
 // Dutchtronix AVR Oscilloscope Clock
 //
-//  Copyright © 2010 Johannes P.M. de Rie
+//  Copyright @ 2010 Johannes P.M. de Rie
 //
 //  All Rights Reserved
 //
@@ -22,4 +22,3 @@ void  RemoveFlashItem(FlashTblEntry_t **pFlashPtr);
 void InitFlashTbl(void);
 void ProcessFlashTbl(void);
 void UpdateFlashEntry(FlashTblEntry_t* pFlashPtr, ScanTblEntry_t* pScanArg, VectorTblEntry_t* pVectNew);
-

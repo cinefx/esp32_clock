@@ -1,6 +1,6 @@
 // Dutchtronix AVR Oscilloscope Clock
 //
-//  Copyright © 2010 Johannes P.M. de Rie
+//  Copyright @ 2010 Johannes P.M. de Rie
 //
 //  All Rights Reserved
 //
@@ -702,7 +702,7 @@ byte DayOfTheWeek(TimeDate_t *p)
 	byte v,x;
 //Century 20
 	v = 6;
-// divide by 12, add this to remainder, add number of 4’s in the remainder
+// divide by 12, add this to remainder, add number of 4<92>s in the remainder
  	v = (v + (((byte)(p->Year/12))+(p->Year%12)+((byte)((p->Year%12)/4)))) % 7;
 	v = (v + pgm_read_byte(&AuxTable[p->Month-1])) % 7;
 // if the year is a leap year, and the month is January or February then minus 1.
@@ -949,4 +949,3 @@ void LedMorseUpdate(void)
 		}
 	}
 }
-

@@ -1,6 +1,6 @@
 // Dutchtronix AVR Oscilloscope Clock
 //
-//  Copyright © 2010 Johannes P.M. de Rie
+//  Copyright @ 2010 Johannes P.M. de Rie
 //
 //  All Rights Reserved
 //
@@ -1814,4 +1814,3 @@ void DisplayHelpscreen(void)
 	SetTC1Countdown(0);										//if necessary
 	fpCurrentRefresh = SavedfpCurrentRefresh;
 }
-
