@@ -16,11 +16,8 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
-#include <stdlib.h>
-#include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <Arduino.h>
+#include <pgmspace.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -44,37 +41,191 @@ CMenuVals_t	MenuData;
 #define TMenuplus3  TMenuplus3hr
 #define TMenuplus4  TMenuplus4hr
 #define OnOffValTbl UsrNameValTbl
-char * OffOnValTbl[] ;
-char * DialValTbl[] ;
-char * NumValTbl[] ;
-char * LedValTbl[];
-char * PlayValTbl[] ;
-char * DSTValTbl[] ;
-char * BaudValTbl[] ;
-char * AppValTbl[] ;
-char * PPSValTbl[] ;
-byte PPSToMenuMap[] ;
-byte PPSMenuMap[] ;
-char * UsrNameValTbl[] ;
-char TMenuGPSVals[] ;
-char TMenuBurninVals[] ;
-char TPushToStart[] ;
-char TMenuApp		[] ;
-char TMenuPPS		[] ;
-char TMenuAlarm		[] ;
-char TMenuNumeric	[] ;
-char TMenuLed		[] ;
-char TMenuBurnin	[] ;
-char TMenuDial		[] ;
-char TMenuPlay		[] ;
-char TMenuUsrName	[] ;
-char TMenuGPS		[] ;
-char TMenuDST		[] ;
-char TMenuChrono	[] ;
-char TMenuReset		[] ;
-char TMenuBaud		[] ;
-extern MScanTblEntry_t MScanTblImage[MENUSCANTABLEN];
 
+char TMenuClock     [] PROGMEM =  "Clock";
+char TMenuCalibrate [] PROGMEM =  "Cal";
+char TMenuTerm      [] PROGMEM =  "Term";
+char TMenuGen       [] PROGMEM =  "Gen";
+char TMenuBoot      [] PROGMEM =  "Boot";
+char TMenuDemo      [] PROGMEM =  "Demo";
+
+char TMenuOn        [] PROGMEM =  "On";
+char TMenuOff       [] PROGMEM =  "Off";
+char TMenu12HR      [] PROGMEM =  "12hr";
+char TMenu24HR      [] PROGMEM =  "24hr";
+char TMenuHex       [] PROGMEM =  "Hex";
+char TMenuDate      [] PROGMEM =  "Date";
+char TMenuDigital   [] PROGMEM =  "Dig";
+char TMenuBinary    [] PROGMEM =  "Bin";
+char TMenuRoman     [] PROGMEM =  "Rom";
+
+char TMenuMin       [] PROGMEM =  "Min";
+char TMenuMorse     [] PROGMEM =  "Morse";
+char TMenuDebug     [] PROGMEM =  "Debug";
+
+char TMenuNorm      [] PROGMEM =  "Norm";
+char TMenuRev       [] PROGMEM =  "Rev";
+char TMenuFastF     [] PROGMEM =  "FF";
+char TMenuFastR     [] PROGMEM =  "FR";
+
+char TMenuEdit      [] PROGMEM =  "Edit";
+char TMenuDay       [] PROGMEM =  "Day";
+char TMenuO         [] PROGMEM =  "O";
+
+char TMenumin12hr   [] PROGMEM =  "-12";
+char TMenumin11hr   [] PROGMEM =  "-11";
+char TMenumin10hr   [] PROGMEM =  "-10";
+char TMenumin9hr    [] PROGMEM =  "-9 ";
+char TMenumin8hr    [] PROGMEM =  "-8 ";
+char TMenumin7hr    [] PROGMEM =  "-7 ";
+char TMenumin6hr    [] PROGMEM =  "-6 ";
+char TMenumin5hr    [] PROGMEM =  "-5 ";
+char TMenumin4hr    [] PROGMEM =  "-4 ";
+char TMenumin3hr    [] PROGMEM =  "-3 ";
+char TMenumin2hr    [] PROGMEM =  "-2 ";
+char TMenumin1hr    [] PROGMEM =  "-1 ";
+char TMenumin0hr    [] PROGMEM =  "0  ";
+char TMenuplus1hr   [] PROGMEM =  "+1 ";
+char TMenuplus2hr   [] PROGMEM =  "+2 ";
+char TMenuplus3hr   [] PROGMEM =  "+3 ";
+char TMenuplus4hr   [] PROGMEM =  "+4 ";
+char TMenuplus5hr   [] PROGMEM =  "+5 ";
+char TMenuplus6hr   [] PROGMEM =  "+6 ";
+char TMenuplus7hr   [] PROGMEM =  "+7 ";
+char TMenuplus8hr   [] PROGMEM =  "+8 ";
+char TMenuplus9hr   [] PROGMEM =  "+9 ";
+char TMenuplus10hr  [] PROGMEM =  "+10";
+char TMenuplus11hr  [] PROGMEM =  "+11";
+char TMenuplus12hr  [] PROGMEM =  "+12";
+
+char TMenu1Hz       [] PROGMEM =  "1Hz";
+char TMenu4096Hz    [] PROGMEM =  "4096Hz";
+
+char TMenuBaud19    [] PROGMEM =  "19200 ";
+char TMenuBaud28    [] PROGMEM =  "28800 ";
+char TMenuBaud38    [] PROGMEM =  "38400 ";
+char TMenuBaud57    [] PROGMEM =  "57600 ";
+char TMenuBaud115   [] PROGMEM =  "115200";
+char TMenuBaud250   [] PROGMEM =  "250000";
+char TMenuBaud48    [] PROGMEM =  "4800  ";
+char TMenuBaud96    [] PROGMEM =  "9600  ";
+char TMenuBaud14    [] PROGMEM =  "14400 ";
+char TMenuUSA       [] PROGMEM =  "USA";
+char TMenuEU        [] PROGMEM =  "EU";
+
+char TMenuGPSVals   [] PROGMEM =  "Off";
+char TPushToStart   [] PROGMEM =  "Push S1 to Start";
+char TMenuApp       [] PROGMEM =  "App";
+char TMenuPPS       [] PROGMEM =  "PPS";
+char TMenuAlarm     [] PROGMEM =  "Alarm";
+char TMenuNumeric   [] PROGMEM =  "Num";
+char TMenuLed       [] PROGMEM =  "Led";
+char TMenuBurnin    [] PROGMEM =  "Burnin";
+char TMenuDial      [] PROGMEM =  "Dial";
+char TMenuPlay      [] PROGMEM =  "Play";
+char TMenuUsrName   [] PROGMEM =  "Name";
+char TMenuGPS       [] PROGMEM =  "GPS";
+char TMenuDST       [] PROGMEM =  "DST";
+char TMenuChrono    [] PROGMEM =  "Chrono";
+char TMenuReset     [] PROGMEM =  "Reset";
+char TMenuBaud      [] PROGMEM =  "Baud";
+
+char TMenuBurninVals[20] PROGMEM =   {'5', 0, '6', 0, '7', 0, '8', 0, '9', 0, '0', 0, '1', 0, '2', 0, '3', 0, '4', 0};
+
+char * OffOnValTbl[2] PROGMEM = {
+  TMenuOff,
+  TMenuOn
+};
+
+char * DialValTbl[6] PROGMEM = {
+  TMenu12HR,
+  TMenu24HR,
+  TMenuRoman,
+  TMenuDigital,
+  TMenuBinary,
+  TMenuMin
+};
+
+char * NumValTbl[6] PROGMEM = {
+  TMenu12HR,
+  TMenu24HR,
+  TMenuHex,
+  TMenuDate,
+  TMenuAlarm,
+  TMenuOff
+};
+
+char * LedValTbl[4] PROGMEM = {
+  TMenuOn,
+  TMenuMorse,
+  TMenuDebug,
+  TMenuOff
+};
+
+char * PlayValTbl[4] PROGMEM = {
+  TMenuNorm,
+  TMenuRev,
+  TMenuFastF,
+  TMenuFastR
+};
+
+char * DSTValTbl[3] PROGMEM = {
+  TMenuUSA,
+  TMenuEU,
+  TMenuOff
+};
+
+char * BaudValTbl[9] PROGMEM = {
+  TMenuBaud19,
+  TMenuBaud28,
+  TMenuBaud38,
+  TMenuBaud57,
+  TMenuBaud115,
+  TMenuBaud250,
+  TMenuBaud48,
+  TMenuBaud96,
+  TMenuBaud14
+};
+
+char * AppValTbl[6] PROGMEM = {
+  TMenuClock,
+  TMenuCalibrate,
+  TMenuTerm,
+  TMenuGen,
+  TMenuDemo,
+  TMenuBoot
+};
+
+char * PPSValTbl[10] PROGMEM = {
+  TMenu1Hz,
+  TMenu4096Hz,
+  TMenumin4,
+  TMenumin3,
+  TMenumin2,
+  TMenumin1,
+  TMenuplus1,
+  TMenuplus2,
+  TMenuplus3,
+  TMenuplus4
+};
+
+byte PPSToMenuMap[10] PROGMEM = {
+  2,3,4,5,0xff,6,7,8,9,0
+};
+
+byte PPSMenuMap[10] PROGMEM = {
+  ONEHZCODE, F4096HZCODE,-4,-3,-2,-1,1,2,3,4
+};
+
+char * UsrNameValTbl[5] PROGMEM = {
+  TMenuOn,
+  TMenuOff,
+  TMenuEdit,
+  TMenuDay,
+  TMenuO
+};
+
+extern MScanTblEntry_t MScanTblImage[MENUSCANTABLEN];
 
 extern void UpdateNumericDisplay(byte newVal);
 extern void UpdateDialDisplay(byte newVal);
@@ -720,6 +871,7 @@ void CMenuStateAdvance(void)
 		NextCMenuState(CMENUIDLE);
 		return;
 	}
+#if 0
 	if (GPIOR0 & _BV(fUPS1)) {			//short push S1
 		GPIOR0 &= ~_BV(fUPS1);			//clear
 		pF = (void (*)(void))pgm_read_word(&(CMenuStateTbl[CMenuState - (CMENUIDLE + 1)].S1Action));		//word address
@@ -739,6 +891,7 @@ void CMenuStateAdvance(void)
 			CMenuFlashPtr = StartStateFlash(p);
 		}
 	}
+#endif
 }
 //
 // Main Program Loop for Menu Processing
@@ -784,7 +937,9 @@ void MainMenuProcessing(BOOL firstRun)
 byte StateCheck4Flags(byte state)
 {
 	if (state & NOPUSH) {
+#if 0
 		GPIOR0 |= _BV(fUPS1);
+#endif
 		state &= ~NOPUSH;
 	}
 	if (state & DBLHAND) {
@@ -813,17 +968,23 @@ void SetPushToStart(void)
 void StateSetHRNR(void)
 {
 	StartStateTextFlash();	//Numeric Text String to flash
+#if 0
 	GPIOR0 |= _BV(fUPS2);	//fake an S2 push to advance to the next state
+#endif
 }
 
 void StateSetHRHAND(void)
 {
+#if 0
 	GPIOR0 |= _BV(fUPS2);	//fake an S2 push to advance to the next state
+#endif
 }
 
 void StateSetHRBIN(void)	//same as StateSetHRHAND
 {
+#if 0
 	GPIOR0 |= _BV(fUPS2);	//fake an S2 push to advance to the next state
+#endif
 }
 
 #define StateSetAlarmHr	StateSetHRNR
@@ -833,7 +994,9 @@ void StateSetMODSET(void)
 {
 	SetPushToStart();
 	StopTextFlash();
+#if 0
 	GPIOR0 |= _BV(fUPS2);	//fake an S2 push to advance to the next state
+#endif
 }
 //
 // Increment Seconds
@@ -943,7 +1106,9 @@ void StateSetDay(void)
 	if (!CheckDaysInMonth(&AVRTimeDateBlk, AVRTimeDateBlk.Day)) {
 		AVRTimeDateBlk.Day = GetDaysInMonth(&AVRTimeDateBlk);
 	}
+ #if 0
 	GPIOR0 |= _BV(fUPS2);		//fake an S2 push to advance to the next state
+ #endif
 }
 
 void StateIncMonth(void)
@@ -970,7 +1135,9 @@ void StateSetDate(void)
 //
 	DSTRetroApply();		//will update RTC if doing DST fix. Should test
 	SetDisplay();
+ #if 0
 	GPIOR0 |= _BV(fUPS2);	//fake an S2 push to advance to the next state
+ #endif
 }
 
 void CModStateAdvance(void)
@@ -989,6 +1156,7 @@ void CModStateAdvance(void)
 // see if an S1 push was issued. If so: advance field value
 // This may be a fake S1 push  (NOPUSH attribute)
 //
+#if 0
 	if (GPIOR0 & _BV(fUPS1)) {
 #if 0&DEBUG
 		ShowCModState(CModState, cnt);
@@ -1024,6 +1192,7 @@ void CModStateAdvance(void)
 		}
 		SetTC1Countdown(30);
 	}
+ #endif
 }
 void MainCModProcessing(void)
 {
@@ -1102,180 +1271,6 @@ void MainCModProcessing(void)
 	UsrShowStatus();
 }
 
-char TMenuApp		[] PROGMEM =	"App";
-char TMenuClock		[] PROGMEM =	"Clock";
-char TMenuCalibrate	[] PROGMEM =	"Cal";
-char TMenuTerm		[] PROGMEM =	"Term";
-char TMenuGen		[] PROGMEM =	"Gen";
-char TMenuBoot		[] PROGMEM =	"Boot";
-char TMenuDemo		[] PROGMEM =	"Demo";
-char TMenuPPS		[] PROGMEM =	"PPS";
-char TMenuNumeric	[] PROGMEM =	"Num";
-char TMenuLed		[] PROGMEM =	"Led";
-char TMenuBurnin	[] PROGMEM =	"Burnin";
-char TMenuDial		[] PROGMEM =	"Dial";
-char TMenuOn		[] PROGMEM =	"On";
-char TMenuOff		[] PROGMEM =	"Off";
-char TMenu12HR		[] PROGMEM =	"12hr";
-char TMenu24HR		[] PROGMEM =	"24hr";
-char TMenuHex		[] PROGMEM =	"Hex";
-char TMenuDate		[] PROGMEM =	"Date";
-char TMenuAlarm		[] PROGMEM =	"Alarm";
-char TMenuDigital	[] PROGMEM =	"Dig";
-char TMenuBinary	[] PROGMEM =	"Bin";
-char TMenuRoman		[] PROGMEM =	"Rom";
-char TMenuMin		[] PROGMEM =	"Min";
-char TMenuMorse		[] PROGMEM =	"Morse";
-char TMenuDebug		[] PROGMEM =	"Debug";
-char TMenuPlay		[] PROGMEM =	"Play";
-char TMenuNorm		[] PROGMEM =	"Norm";
-char TMenuRev		[] PROGMEM =	"Rev";
-char TMenuFastF		[] PROGMEM =	"FF";
-char TMenuFastR		[] PROGMEM =	"FR";
-char TMenuUsrName	[] PROGMEM =	"Name";
-char TMenuEdit		[] PROGMEM =	"Edit";
-char TMenuDay		[] PROGMEM =	"Day";
-char TMenuO			[] PROGMEM =	"O";
-char TPushToStart	[] PROGMEM =	"Push S1 to Start";
-char TMenuGPS		[] PROGMEM =	"GPS";
-char TMenuGPSVals	[] PROGMEM =	"Off";
-char TMenumin12hr	[] PROGMEM =	"-12";
-char TMenumin11hr	[] PROGMEM =	"-11";
-char TMenumin10hr	[] PROGMEM =	"-10";
-char TMenumin9hr	[] PROGMEM =	"-9 ";
-char TMenumin8hr	[] PROGMEM =	"-8 ";
-char TMenumin7hr	[] PROGMEM =	"-7 ";
-char TMenumin6hr	[] PROGMEM =	"-6 ";
-char TMenumin5hr	[] PROGMEM =	"-5 ";
-char TMenumin4hr	[] PROGMEM =	"-4 ";
-char TMenumin3hr	[] PROGMEM =	"-3 ";
-char TMenumin2hr	[] PROGMEM =	"-2 ";
-char TMenumin1hr	[] PROGMEM =	"-1 ";
-char TMenumin0hr	[] PROGMEM =	"0  ";
-char TMenuplus1hr	[] PROGMEM =	"+1 ";
-char TMenuplus2hr	[] PROGMEM =	"+2 ";
-char TMenuplus3hr	[] PROGMEM =	"+3 ";
-char TMenuplus4hr	[] PROGMEM =	"+4 ";
-char TMenuplus5hr	[] PROGMEM =	"+5 ";
-char TMenuplus6hr	[] PROGMEM =	"+6 ";
-char TMenuplus7hr	[] PROGMEM =	"+7 ";
-char TMenuplus8hr	[] PROGMEM =	"+8 ";
-char TMenuplus9hr	[] PROGMEM =	"+9 ";
-char TMenuplus10hr	[] PROGMEM =	"+10";
-char TMenuplus11hr	[] PROGMEM =	"+11";
-char TMenuplus12hr	[] PROGMEM =	"+12";
-char TMenuDST		[] PROGMEM =	"DST";
-char TMenuChrono	[] PROGMEM =	"Chrono";
-char TMenuReset		[] PROGMEM =	"Reset";
-char TMenu1Hz		[] PROGMEM =	"1Hz";
-char TMenu4096Hz	[] PROGMEM =	"4096Hz";
-char TMenuBaud		[] PROGMEM =	"Baud";
-char TMenuBaud19	[] PROGMEM =	"19200 ";
-char TMenuBaud28	[] PROGMEM =	"28800 ";
-char TMenuBaud38	[] PROGMEM =	"38400 ";
-char TMenuBaud57	[] PROGMEM =	"57600 ";
-char TMenuBaud115	[] PROGMEM =	"115200";
-char TMenuBaud250	[] PROGMEM =	"250000";
-char TMenuBaud48	[] PROGMEM =	"4800  ";
-char TMenuBaud96	[] PROGMEM =	"9600  ";
-char TMenuBaud14	[] PROGMEM =	"14400 ";
-char TMenuUSA		[] PROGMEM =	"USA";
-char TMenuEU		[] PROGMEM =	"EU";
-
-char TMenuBurninVals[20] PROGMEM = 	{'5', 0, '6', 0, '7', 0, '8', 0, '9', 0, '0', 0, '1', 0, '2', 0, '3', 0, '4', 0};
-
-char * DialValTbl[6] PROGMEM = {
-	TMenu12HR,
-	TMenu24HR,
-	TMenuRoman,
-	TMenuDigital,
-	TMenuBinary,
-	TMenuMin
-};
-
-char * NumValTbl[6] PROGMEM = {
-	TMenu12HR,
-	TMenu24HR,
-	TMenuHex,
-	TMenuDate,
-	TMenuAlarm,
-	TMenuOff
-};
-
-char * LedValTbl[4] PROGMEM = {
-	TMenuOn,
-	TMenuMorse,
-	TMenuDebug,
-	TMenuOff
-};
-
-char * BaudValTbl[9] PROGMEM = {
-	TMenuBaud19,
-	TMenuBaud28,
-	TMenuBaud38,
-	TMenuBaud57,
-	TMenuBaud115,
-	TMenuBaud250,
-	TMenuBaud48,
-	TMenuBaud96,
-	TMenuBaud14
-};
-
-char * OffOnValTbl[2] PROGMEM = {
-	TMenuOff,
-	TMenuOn
-};
-
-char * PPSValTbl[10] PROGMEM = {
-	TMenu1Hz,
-	TMenu4096Hz,
-	TMenumin4,
-	TMenumin3,
-	TMenumin2,
-	TMenumin1,
-	TMenuplus1,
-	TMenuplus2,
-	TMenuplus3,
-	TMenuplus4
-};
-
-byte PPSMenuMap[10] PROGMEM = {
-	ONEHZCODE, F4096HZCODE,-4,-3,-2,-1,1,2,3,4
-};
-
-byte PPSToMenuMap[10] PROGMEM = {
-	2,3,4,5,0xff,6,7,8,9,0
-};
-
-char * PlayValTbl[4] PROGMEM = {
-	TMenuNorm,
-	TMenuRev,
-	TMenuFastF,
-	TMenuFastR
-};
-
-char * UsrNameValTbl[5] PROGMEM = {
-	TMenuOn,
-	TMenuOff,
-	TMenuEdit,
-	TMenuDay,
-	TMenuO
-};
-
-char * DSTValTbl[3] PROGMEM = {
-	TMenuUSA,
-	TMenuEU,
-	TMenuOff
-};
-
-char * AppValTbl[6] PROGMEM = {
-	TMenuClock,
-	TMenuCalibrate,
-	TMenuTerm,
-	TMenuGen,
-	TMenuDemo,
-	TMenuBoot
-};
 //
 // Menu Change Table: Action, Finalize, Flash
 //

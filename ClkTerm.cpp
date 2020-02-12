@@ -16,10 +16,11 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
+#include <pgmspace.h>
+#include <Arduino.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -167,7 +168,7 @@ void RunTerm(void)
 	Time2Ticks = TERMTIMEOUTTICKS;							//Time before we start to flash the cursor
 	do {
 		ClockWorks();										//Update the display and process events
-
+#if 0
 		if (GPIOR0 & _BV(fUPS2)) {
 			StopCursorFlashing();
 			DisplayHelpscreen();
@@ -182,6 +183,7 @@ void RunTerm(void)
 			SetDialDisplay();								//undo any changes made in SetDynamicTermOptions()
 			return;
 		}
+  #endif
 		//
 		// Was a char received on the Serial Input
 		//
@@ -229,7 +231,7 @@ void TermSerialInput(void)
 	byte b = UARTReceiveByte();					//get byte
 	if (TermState == StateNoCmd) {				//Binary mode, waiting for cmd
 		if (b <= TermMaxCmd) {					//Valid cmd?
-			TermCmd = b;
+			TermCmd = (_TermCmd)b;
 			TermState = StateCmd;
 			argidx = 0;
 		} else {

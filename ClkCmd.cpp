@@ -14,11 +14,8 @@
 //  This notice (including the copyright and warranty disclaimer)
 //  must be included in all copies or derivations of this software.
 //
-#include <avr/io.h>
-#include <stdlib.h>
-#include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <Arduino.h>
+#include <pgmspace.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -362,11 +359,11 @@ BOOL UsrCommand(void)
 			UsrSendByte(' ');
 		} while (cmd >= 'Z' - 'A' + 1);
 		Flags.AppChanged = FALSE;
-		if ((pCmd = strchr_P(ToggleCommands, oldCmd)) != NULL) {
+		if ((pCmd = strchr(ToggleCommands, oldCmd)) != NULL) {
 			b = UsrToggleCmd(pCmd - ToggleCommands);
-		} else if ((pCmd = strchr_P(ChangeCommands, oldCmd)) != NULL) {
+		} else if ((pCmd = strchr(ChangeCommands, oldCmd)) != NULL) {
 			b = UsrChangeCmd(pCmd - ChangeCommands);
-		} else if ((pCmd = strchr_P(OtherCommands, oldCmd)) != NULL) {
+		} else if ((pCmd = strchr(OtherCommands, oldCmd)) != NULL) {
 			b = UsrOtherCmd(pCmd - OtherCommands);
 		} else {
 			b = FALSE;
@@ -577,7 +574,7 @@ void UsrShowStatus(void)
 	p = UsrInsertSpace(p);
 	p = FormatAVRTime(p);
 	p = UsrInsertSpace(p);
-	p = strcpy_P(p, (void *)pgm_read_word(&WeekDays[DayOfTheWeek(&AVRTimeDateBlk)])) + strlen(p);
+	p = strcpy(p, (const char *)pgm_read_word(&WeekDays[DayOfTheWeek(&AVRTimeDateBlk)])) + strlen(p);
 	p = UsrInsertSpace(p);
 //
 // display 'L' if Led is on

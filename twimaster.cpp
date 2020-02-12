@@ -6,10 +6,10 @@
 * Target:   any AVR device with hardware TWI 
 * Usage:    API compatible with I2C Software Library i2cmaster.h
 **************************************************************************/
+#if 0
 #include <inttypes.h>
-#include <util/twi.h>
 
-#include <i2cmaster.h>
+#include "i2cmaster.h"
 
 
 /* define CPU frequency in Mhz here if not defined in Makefile */
@@ -136,3 +136,4 @@ unsigned char i2c_readNak(void)
     return TWDR;
 
 }/* i2c_readNak */
+#endif

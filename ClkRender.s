@@ -14,11 +14,9 @@
 ;  This notice (including the copyright and warranty disclaimer)
 ;  must be included in all copies or derivations of this software.
 ;
-#include <avr/io.h>
-#include <avr/portpins.h>
 
-#include "./avr.inc"
-#include "./ClkConfig.h"
+#include "avr.h"
+#include "ClkConfig.h"
 
 	.extern	ScanTbl, MScanTbl, TermScanTblStr
 #define	ScanTblStrFlash (ScanTbl + stStrFlash * 4)

@@ -16,11 +16,11 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
+#if 0
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <pgmspace.h>
+#include <Arduino.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -61,10 +61,10 @@ extern void setLed(byte v);
 extern void StartKeyDebouncing(void);
 extern uint	IntrpCnt;
 
-pByte Led2Tbl[] ;
-pByte Led3Tbl[] ;
-pByte Led4Tbl[] ;
-byte AMPMMapping[] ;
+pByte* Led2Tbl;
+pByte* Led3Tbl;
+pByte* Led4Tbl;
+byte* AMPMMapping;
 
 BOOL RunClock(void);
 void InitData(void);
@@ -104,7 +104,7 @@ void PPSMissingOff(void);
 void SetHelpScanTbl(void);
 void DisplayHelpscreen(void);
 
-char MsgPszSerialInOverflow[];
+char MsgPszSerialInOverflow[] PROGMEM = "Serial In Overflow \n\r";
 
 #define GetNumDisplayMode ValidateNumericDisplay
 
@@ -1814,3 +1814,4 @@ void DisplayHelpscreen(void)
 	SetTC1Countdown(0);										//if necessary
 	fpCurrentRefresh = SavedfpCurrentRefresh;
 }
+#endif

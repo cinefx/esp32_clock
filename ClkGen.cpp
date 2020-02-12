@@ -16,12 +16,8 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
-#include <stdlib.h>
-#include <string.h>
-#include <avr/interrupt.h>
-#include <avr/pgmspace.h>
-#include <util/delay.h>
+#include <Arduino.h>
+#include <pgmspace.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -177,7 +173,7 @@ void SendAdderValue(void)
 	} adder;
 	adder.l = GetAdder();
 
-	_delay_ms(10);
+	delay(10);
 #if ASCIILINK
 	UsrSendByte('F');				// flag
 	Special_UARTPfu08(0);					// zero byte for 32-bit compatibility
@@ -264,10 +260,11 @@ void FuncGenProcessInput(void)
 //
 // Check if the push button switch S2 is closed. Reboot if it is
 //
+#if 0
 	if ((SWPin & _BV(SW2Bit)) == 0) {		//Low means push button pressed
 		InitiateSysReset();
 	}
-
+#endif
 	byte ch = UARTReceiveByte();
 #if ASCIILINK
 	UsrSendByte(ch);

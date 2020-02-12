@@ -35,6 +35,7 @@
 
 #else
 // Registers r2..r6, r9..r10 are used in the render functions.
+#if 0
     register unsigned char _r2_ asm("r2"); 
     register unsigned char _r3_ asm("r3"); 
     register unsigned char _r4_ asm("r4"); 
@@ -57,6 +58,7 @@
 	//
     register unsigned char _r9_ asm("r9"); 
     register unsigned char _r10_ asm("r10"); 
+#endif
 #endif
 
 #define MajorVersion 4
@@ -133,8 +135,10 @@
 #define	SW1_BIT 4
 #define	SW2_BIT 5
 #define SWDDR	DDRB
+#if 0
 #define SWPort	PORTB
-#define SWPin 	PINB
+#define SWPin 	(PB0&1)//PINB
+#endif
 #define SW1Bit	4
 #define SW2Bit	5
 //

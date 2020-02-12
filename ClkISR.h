@@ -81,9 +81,14 @@ extern byte UARTReceiveByte(void);
 extern void UARTSetBaudVal(byte newBaud);
 extern void UARTInit(byte newBaud);
 extern void UARTSet115200(void);
+
 inline BOOL UARTHasData(void)
 {
+#if 0
 	return ((GPIOR0 & _BV(fRcvdChar)) != 0);
+#else
+  return true;
+#endif
 }
 inline BOOL IsUARTOutReady(void)
 {

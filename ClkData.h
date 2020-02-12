@@ -359,7 +359,7 @@ enum {
 	IOCTL_DONOTUSE1			//prevent 0xff value
 };
 
-enum {
+typedef enum {
 	VectNone,
 	VectEntry = 0xf0,		//5 arg bytes
 	VectRange = 0xf1,		//2 arg bytes
@@ -369,8 +369,9 @@ enum {
 	TermSetBurnIn = 0xf5,	//1 arg byte
 	TermCtrl = 0xf6,		//1 arg byte. 0 = Clear Screen
 	TermMaxCmd = TermCtrl
-} TermCmd;
+}_TermCmd;
 
+extern _TermCmd TermCmd;
 
 #define ScanTbl_Dial (&ScanTbl[stDialMarks])
 #define	ScanTbl_Full (&ScanTbl[stDialDigits])

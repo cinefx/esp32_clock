@@ -14,12 +14,11 @@
 //  This notice (including the copyright and warranty disclaimer)
 //  must be included in all copies or derivations of this software.
 //
-#include <avr/io.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
-#include <avr/wdt.h>
+#include <pgmspace.h>
+#include <Arduino.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -40,6 +39,7 @@ extern void FuncGenProcessInput(void);
 
 void setLed(byte v);
 
+#if 0 
 #if !NETFREQUENCY
 //
 // Initialize INT0
@@ -751,3 +751,4 @@ void UARTKillPendingOutput(void)
 	//wait for current send, if any, to complete
 	while (!UARTOutReady) ;
 }
+#endif

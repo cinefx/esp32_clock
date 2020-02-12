@@ -95,7 +95,7 @@ void ClearEEConfiguration(void);
 void ReadEEConfiguration(void);
 
 byte DayOfTheWeek(TimeDate_t *p);
-char *WeekDays[7];
+extern char *WeekDays[7];
 void TotalUSDebt(TimeDate_t *p, char *pStr);
 
 void ClrLedMorseData(void);

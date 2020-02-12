@@ -16,11 +16,12 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
+
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <pgmspace.h>
+#include <Arduino.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"

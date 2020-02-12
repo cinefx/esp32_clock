@@ -16,11 +16,13 @@
 //
 // Firmware for Dutchtronix AVR Oscilloscope Clock
 //
-#include <avr/io.h>
+#if 0
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <pgmspace.h>
+#endif
+
+#include <Arduino.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
@@ -112,7 +114,7 @@ extern byte args[];
 typedef struct {
 	byte x0, x1, x2, x3;
 } Vect_t;
-#include "vectsamples.inc"
+#include "vectsamples.h"
 
 void PrintDisplayableChar(PGM_P p)
 {
@@ -134,11 +136,13 @@ void PrintDisplayableChar(PGM_P p)
 void DemoWait(byte nSecs)
 {
 	SetTC1Countdown(nSecs);
+#if 0
 	do {
 		ClockWorks();
 		DiscardGPSInput();
 	} while (TC1CountdownActive() && !(GPIOR0 & _BV(fUPS2)));
 	GPIOR0 &= ~_BV(fUPS2);									//clear S2 up action if necessary
+#endif
 	SetTC1Countdown(0);										//not really necessary
 }
 

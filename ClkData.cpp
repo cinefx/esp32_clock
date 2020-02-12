@@ -14,14 +14,15 @@
 //  This notice (including the copyright and warranty disclaimer)
 //  must be included in all copies or derivations of this software.
 //
-#include <avr/io.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
+#include <pgmspace.h>
 
 #include "./ClkConfig.h"
 #include "./ClkData.h"
+
+_TermCmd TermCmd;
 
 //
 // Clock Display Scan Table
@@ -189,5 +190,5 @@ LedMorseDigit_t LedMorseDigits[10] PROGMEM = {
 	{{TRUE, TRUE, TRUE, TRUE, FALSE}}		//9
 };
 
-#include	"./vecttable.inc"
-#include	"./font8x5.inc"
+#include	"vecttable.h"
+#include	"font8x5.h"

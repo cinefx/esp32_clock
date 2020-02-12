@@ -85,8 +85,6 @@
 #error "This library requires AVR-GCC 3.4 or later, update to newer AVR-GCC compiler !"
 #endif
 
-#include <avr/io.h>
-
 /** defines the data direction (reading from I2C device) in i2c_start(),i2c_rep_start() */
 #define I2C_READ    1
 
